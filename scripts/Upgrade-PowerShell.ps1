@@ -235,11 +235,6 @@ if ($PSVersionTable -eq $null) {
 
 # exit if the target version is the same as the actual version
 $current_ps_version = [version]"$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)"
-if ($current_ps_version -eq [version]$version) {
-    Write-Log -message "current and target PS version are the same, no action is required"
-    Clear-AutoLogon
-    exit 0
-}
 
 $os_version = [System.Environment]::OSVersion.Version
 $architecture = $env:PROCESSOR_ARCHITECTURE
