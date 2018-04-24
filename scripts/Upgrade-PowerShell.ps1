@@ -385,7 +385,7 @@ foreach ($action in $actions) {
     
     $exit_code = Run-Process -executable $file -arguments $arguments
     if ($exit_code -ne 0 -and $exit_code -ne 3010) {
-        $log_msg = "$($error_msg): exit code $exit_code"
+        $log_msg = "$($error_msg): exijht code $exit_code"
         Write-Log -message $log_msg -level "ERROR"
     }
     Write-Log -message "running powershell update to version123"
