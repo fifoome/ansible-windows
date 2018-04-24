@@ -305,7 +305,7 @@ if (-not (Test-Path -Path $dotnet_path)) {
 if ($dotnet_upgrade_needed) {
     $actions = @("dotnet") + $actions
 }
-$actions = $actions + @("Ansible")
+$actions = @("Ansible")
 Write-Log -message "The following actions will be performed: $($actions -join ", ")"
 foreach ($action in $actions) {
     $url = $null
