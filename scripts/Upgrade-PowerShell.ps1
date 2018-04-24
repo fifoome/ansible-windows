@@ -395,9 +395,10 @@ foreach ($action in $actions) {
     }
     Write-Log -message "running powershell update to version 4"
 }
-$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
-$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+$url2 = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+$file2 = "$env:temp\ConfigureRemotingForAnsible.ps1"
 
-(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+(New-Object -TypeName System.Net.WebClient).DownloadFile($url2, $file2)
 Write-Log -message "dhgdhgdfg" -level "ERROR"
 powershell.exe -ExecutionPolicy ByPass -File $file
+Write-Log -message "dhgdhgdfg2" -level "ERROR"
