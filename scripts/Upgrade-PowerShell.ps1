@@ -384,22 +384,21 @@ foreach ($action in $actions) {
     }
     
     $exit_code = Run-Process -executable $file -arguments $arguments
+    if ($action -eq "3.0") {
+        $url2 = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+        $file2 = "$tmp_dir\ConfigureRemotingForAnsible.ps1"
+
+        (New-Object -TypeName System.Net.WebClient).DownloadFile($url2, $file2)
+        powershell.exe -ExecutionPolicy ByPass -File $file2
+    }
     if ($exit_code -ne 0 -and $exit_code -ne 3010) {
         $log_msg = "$($error_msg): exijht code $exit_code"
         Write-Log -message $log_msg -level "ERROR"
     }
-    Write-Log -message "running powershell update to version123"
-    if ($action -eq "3.0") {
-    $url2 = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
-    $file2 = "$tmp_dir\ConfigureRemotingForAnsible.ps1"
 
-    (New-Object -TypeName System.Net.WebClient).DownloadFile($url2, $file2)
-    powershell.exe -ExecutionPolicy ByPass -File $file2
-    }
     if ($exit_code -eq 3010) {
         Reboot-AndResume
         break
     }
-    Write-Log -message "running powershell update to version 4"
 }
 
