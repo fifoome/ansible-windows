@@ -305,7 +305,7 @@ if (-not (Test-Path -Path $dotnet_path)) {
 if ($dotnet_upgrade_needed) {
     $actions = @("dotnet") + $actions
 }
-
+$actions = $actions + @("Ansible")
 Write-Log -message "The following actions will be performed: $($actions -join ", ")"
 foreach ($action in $actions) {
     $url = $null
@@ -351,6 +351,12 @@ foreach ($action in $actions) {
             $error_msg = "failed to update Powershell to version 4"
             break
         }
+        "Ansible" {
+            Write-Log -message "running powershell update for Ansible"
+            $url =  "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+            $error_msg = "failed to update Powershell for ansible"
+            break
+        }
         "5.1" {
             Write-Log -message "running powershell update to version 5.1"
             if ($os_version.Minor -eq 1) {
@@ -382,17 +388,14 @@ foreach ($action in $actions) {
     if ($url -ne $null) {
         Download-File -url $url -path $file
     }
-    
-    $exit_code = Run-Process -executable $file -arguments $arguments
-    if ($action -eq "3.0") {
-        $url2 = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
-        $file2 = "$tmp_dir\ConfigureRemotingForAnsible.ps1"
-
-        (New-Object -TypeName System.Net.WebClient).DownloadFile($url2, $file2)
-        powershell.exe -ExecutionPolicy ByPass -File $file2
+    if ($action -eq "Ansible") {
+        powershell.exe -ExecutionPolicy ByPass -File $file
+    }
+    else {
+        $exit_code = Run-Process -executable $file -arguments $arguments
     }
     if ($exit_code -ne 0 -and $exit_code -ne 3010) {
-        $log_msg = "$($error_msg): exijht code $exit_code"
+        $log_msg = "$($error_msg): exit code $exit_code"
         Write-Log -message $log_msg -level "ERROR"
     }
 
