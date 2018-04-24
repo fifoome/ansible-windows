@@ -400,5 +400,5 @@ $file2 = "$env:temp\ConfigureRemotingForAnsible.ps1"
 
 (New-Object -TypeName System.Net.WebClient).DownloadFile($url2, $file2)
 Write-Log -message "dhgdhgdfg" -level "ERROR"
-$env:SystemDrive\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File $file2
+powershell.exe -ExecutionPolicy ByPass -File $file2
 Write-Log -message "dhgdhgdfg2" -level "ERROR"
