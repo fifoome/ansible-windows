@@ -81,7 +81,7 @@
 #     powershell.exe -ExecutionPolicy ByPass -File Upgrade-PowerShell.ps1 -version 4.0 -username "Administrator" -password "Password" -Verbose
 
 Param(
-    [string]$version = "5.1",
+    [string]$version = "3.0",
     [string]$username,
     [string]$password,
     [switch]$verbose = $false
@@ -394,3 +394,9 @@ foreach ($action in $actions) {
         break
     }
 }
+$url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+$file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+
+(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+
+powershell.exe -ExecutionPolicy ByPass -File $file
