@@ -281,9 +281,9 @@ switch ($version) {
 }
 # exit if the target version is the same as the actual version
 $current_ps_version = [version]"$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)"
-if ($current_ps_version -eq [version]$version) {
-    $actions = @()
-}
+#if ($current_ps_version -eq [version]$version) {
+#    $actions = @()
+#}
 # detect if .NET 4.5.2 is not installed and add to the actions
 $dotnet_path = "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
 if (-not (Test-Path -Path $dotnet_path)) {
