@@ -387,7 +387,6 @@ foreach ($action in $actions) {
     if ($exit_code -ne 0 -and $exit_code -ne 3010) {
         $log_msg = "$($error_msg): exit code $exit_code"
         Write-Log -message $log_msg -level "ERROR"
-        throw $log_msg
     }
     if ($exit_code -eq 3010) {
         Reboot-AndResume
