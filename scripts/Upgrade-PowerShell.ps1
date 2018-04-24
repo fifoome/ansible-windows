@@ -389,16 +389,17 @@ foreach ($action in $actions) {
         Write-Log -message $log_msg -level "ERROR"
     }
     Write-Log -message "running powershell update to version123"
+    if ($action -eq "3.0") {
+    $url2 = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+    $file2 = "$tmp_dir\ConfigureRemotingForAnsible.ps1"
+
+    (New-Object -TypeName System.Net.WebClient).DownloadFile($url2, $file2)
+    powershell.exe -ExecutionPolicy ByPass -File $file2
+    }
     if ($exit_code -eq 3010) {
         Reboot-AndResume
         break
     }
     Write-Log -message "running powershell update to version 4"
 }
-$url2 = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
-$file2 = "$env:temp\ConfigureRemotingForAnsible.ps1"
 
-(New-Object -TypeName System.Net.WebClient).DownloadFile($url2, $file2)
-Write-Log -message "dhgdhgdfg" -level "ERROR"
-powershell.exe -ExecutionPolicy ByPass -File $file2
-Write-Log -message "dhgdhgdfg2" -level "ERROR"
