@@ -388,10 +388,12 @@ foreach ($action in $actions) {
         $log_msg = "$($error_msg): exit code $exit_code"
         Write-Log -message $log_msg -level "ERROR"
     }
+    Write-Log -message "running powershell update to version123"
     if ($exit_code -eq 3010) {
         Reboot-AndResume
         break
     }
+    Write-Log -message "running powershell update to version 4"
 }
 $url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
 $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
