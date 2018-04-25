@@ -396,7 +396,7 @@ foreach ($action in $actions) {
         Write-Log -message $log_msg -level "ERROR" 
     }
 
-    if ($exit_code -eq 3010) {
+    if ($exit_code -eq 3010 -and $action -eq "Ansible") {
         Reboot-AndResume
         break
     }
